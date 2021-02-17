@@ -1,8 +1,16 @@
 import os
 
 import astropy.units as u
+from dustmaps.config import config as dustconfig
+from dustmaps import sfd
 
-data_dir = "/home/kadu/Dropbox/splus-emlines/data"
+home_dir = "/home/kadu/Dropbox/splus-emlines"
+data_dir = os.path.join(home_dir, "data")
+
+dustmaps_dir = os.path.join(data_dir, "dustmaps")
+dustconfig["data_dir"] = dustmaps_dir
+if not os.path.exists(os.path.join(dustmaps_dir, "sfd")):
+    sfd.fetch()
 
 ps = 0.55 * u.arcsec / u.pixel
 
